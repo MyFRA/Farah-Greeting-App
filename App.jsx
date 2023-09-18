@@ -39,7 +39,7 @@ function App() {
     return (
         <View>
             <Video
-                source={require('./src/assets/videos/bg.mp4')}
+                source={require('./src/assets/videos/background.mp4')}
                 style={styles.backgroundVideo}
                 muted={true}
                 repeat={false}
