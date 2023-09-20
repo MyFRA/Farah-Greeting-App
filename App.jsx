@@ -22,6 +22,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SplashScreen from './src/screens/SplashScreen';
 import BirthdayScreen from './src/screens/BirthdayScreen';
+import WishScreen from './src/screens/WishScreen';
+import AuthorScreen from './src/screens/AuthorScreen';
 
 const Stack = createNativeStackNavigator();
 function App() {
@@ -41,6 +43,14 @@ function App() {
                 <Stack.Screen
                     name='SplashScreen'
                     component={SplashScreen}
+                />
+                <Stack.Screen
+                    name='WishScreen'
+                    component={WishScreen}
+                />
+                <Stack.Screen
+                    name='AuthorScreen'
+                    component={AuthorScreen}
                 />
 
             </Stack.Navigator>

@@ -6,7 +6,14 @@ import FastImage from "react-native-fast-image";
 import Sound from "react-native-sound";
 import ParticlesBg from 'react-native-particles-bg';
 
-export default function BirthdayScreen() {
+var whoosh = new Sound('itsumo_nando_demo.mp3', Sound.MAIN_BUNDLE, (error) => {
+    if (error) {
+        console.log('failed to load the sound', error);
+        return;
+    }
+})
+
+export default function BirthdayScreen({ navigation }) {
     const [displayCandle1, setDisplayCandle1] = useState('none')
     const [displayCandle2, setDisplayCandle2] = useState('none')
     const [showParticles, setShowParticles] = useState(false)
@@ -14,17 +21,11 @@ export default function BirthdayScreen() {
     const [fadeTextFarah] = useState(new Animated.Value(0))
     const [bgColor, setBgColor] = useState('rgba(0, 0, 0, 0.1)')
     const [bgButtonBuatHarapan, setBgButtonBuatHarapan] = useState('rgb(107 114 128)')
+    const [enableButtonWishes, setEnableButtonWishes] = useState(false)
 
     useEffect(() => {
         if (displayCandle1 == 'flex' && displayCandle2 == 'flex') {
-            const whoosh = new Sound('itsumo_nando_demo.mp3', Sound.MAIN_BUNDLE, (error) => {
-                if (error) {
-                    console.log('failed to load the sound', error);
-                    return;
-                } else {
-                    whoosh.play()
-                }
-            })
+            whoosh.play()
 
             setShowParticles(true)
             Animated.timing(fadeTextHappy, {
@@ -41,6 +42,7 @@ export default function BirthdayScreen() {
 
             setBgColor('rgba(0, 0, 0, 0.5)')
             setBgButtonBuatHarapan('rgb(249 115 22)')
+            setEnableButtonWishes(true)
         }
     }, [displayCandle1, displayCandle2])
 
@@ -67,7 +69,7 @@ export default function BirthdayScreen() {
             <KeepAwake />
 
             <View style={{ position: 'relative', flex: 1 }}>
-                <ImageBackground source={{ uri: 'https://static.vecteezy.com/system/resources/previews/005/421/775/non_2x/beautifull-cherry-blossom-background-free-vector.jpg' }} style={{ flex: 1 }} resizeMode="cover">
+                <ImageBackground source={{ uri: 'https://static.vecteezy.com/system/resources/previews/017/188/305/original/japanese-background-illustration-happy-new-year-decoration-template-in-pastel-japanese-pattern-style-with-fuji-mountain-moon-cloud-and-cherry-blossom-design-for-wallpaper-poster-banner-vector.jpg' }} style={{ flex: 1 }} resizeMode="cover">
                     <View style={{ backgroundColor: bgColor, flex: 1 }}>
                         {
                             showParticles ?
@@ -106,6 +108,13 @@ export default function BirthdayScreen() {
 
 
                     <TouchableOpacity
+                        onPress={() => {
+                            if (enableButtonWishes) {
+                                whoosh.stop()
+                                navigation.navigate('WishScreen')
+                            }
+                        }}
+
                         style={{
                             backgroundColor: bgButtonBuatHarapan,
                             borderRadius: 10,
