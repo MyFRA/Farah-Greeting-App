@@ -1,4 +1,13 @@
 module.exports = {
+    dependencies: {
+        '@flyskywhy/react-native-gcanvas': {
+            platforms: {
+                android: {
+                    packageImportPath: 'import com.taobao.gcanvas.bridges.rn.GReactPackage;',
+                },
+            },
+        },
+    },
     project: {
         ios: {},
         android: {}

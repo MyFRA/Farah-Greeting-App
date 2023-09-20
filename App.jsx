@@ -5,9 +5,11 @@
  * @format
  */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Video from 'react-native-video';
 import {
+    Animated,
+    Button,
     Dimensions,
     StatusBar,
     Text,
@@ -16,52 +18,37 @@ import {
 import { StyleSheet } from "react-native";
 import Sound from 'react-native-sound';
 import SystemNavigationBar from 'react-native-system-navigation-bar';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import SplashScreen from './src/screens/SplashScreen';
+import BirthdayScreen from './src/screens/BirthdayScreen';
 
-const { height } = Dimensions.get("window");
-
+const Stack = createNativeStackNavigator();
 function App() {
-
-    useEffect(() => {
-        const whoosh = new Sound('katawaredoki.mp3', Sound.MAIN_BUNDLE, (error) => {
-            if (error) {
-                console.log('failed to load the sound', error);
-                return;
-            } else {
-                whoosh.play()
-            }
-        })
-
-        StatusBar.setHidden(true)
-        SystemNavigationBar.navigationHide();
-
-    }, [])
+    SystemNavigationBar.navigationHide();
 
     return (
-        <View>
-            <Video
-                source={require('./src/assets/videos/background.mp4')}
-                style={styles.backgroundVideo}
-                muted={true}
-                repeat={false}
-                resizeMode={"cover"}
-                rate={1.0}
-                ignoreSilentSwitch={"obey"}
-            />
-        </View>
-    );
+        <NavigationContainer>
+            <Stack.Navigator
+                screenOptions={{
+                    headerShown: false
+                }}
+            >
+                <Stack.Screen
+                    name='BirthdayScreen'
+                    component={BirthdayScreen}
+                />
+                <Stack.Screen
+                    name='SplashScreen'
+                    component={SplashScreen}
+                />
+
+            </Stack.Navigator>
+        </NavigationContainer>
+    )
 }
 
-const styles = StyleSheet.create({
-    backgroundVideo: {
-        height: height,
-        position: "absolute",
-        top: 0,
-        left: 0,
-        alignItems: "stretch",
-        bottom: 0,
-        right: 0
-    }
-});
+
 
 
 export default App;
