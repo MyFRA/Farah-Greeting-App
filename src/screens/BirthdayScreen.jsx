@@ -27,7 +27,7 @@ export default function BirthdayScreen({ navigation }) {
 
     useEffect(() => {
         if (isFocused) {
-            if (!whoosh.isPlaying()) {
+            if (!whoosh.isPlaying() && displayCandle1 == 'flex' && displayCandle2 == 'flex') {
                 whoosh.play()
             }
 

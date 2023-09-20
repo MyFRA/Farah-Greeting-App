@@ -1,9 +1,10 @@
 import { useIsFocused } from "@react-navigation/native";
 import KeepAwake from "@sayem314/react-native-keep-awake";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { BackHandler, Dimensions, ImageBackground, ScrollView, StatusBar, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Sound from "react-native-sound";
 import TypeWriter from 'react-native-typewriter'
+import ParticlesBg from 'react-native-particles-bg';
 
 var whoosh = new Sound('wishing.mp3', Sound.MAIN_BUNDLE, (error) => {
     if (error) {
@@ -35,9 +36,20 @@ export default function AuthorScreen({ navigation }) {
         whoosh.play()
     }, [])
 
-    const textInputRef = useRef()
-
-    const [wishesText, setWishesText] = useState('')
+    let config = {
+        num: [4, 7],
+        rps: 0.1,
+        radius: [5, 40],
+        life: [1.5, 3],
+        v: [2, 3],
+        tha: [-50, 50],
+        alpha: [0.6, 0],
+        scale: [.1, 0.9],
+        position: "all",
+        //color: ["random", "#ff0000"],
+        cross: "dead",
+        random: 10
+    };
 
     return (
         <View style={{ position: 'relative', flex: 1 }}>
@@ -45,19 +57,10 @@ export default function AuthorScreen({ navigation }) {
             <StatusBar hidden={true} />
             <KeepAwake />
 
-            <View
-                style={{ width: 0, height: 0 }}
-            >
-                <TextInput
-                    multiline={true}
-                    style={{ width: 0, height: 0 }} onChangeText={(text) => {
-                        setWishesText(text)
-                    }} ref={textInputRef} />
-            </View>
-
             <ImageBackground source={require('./../assets/images/author_screen_bg.jpg')} style={{ flex: 1 }} resizeMode="cover">
+                <ParticlesBg type="custom" config={config} bg={false} />
                 <View
-                    style={{ paddingHorizontal: 100, justifyContent: 'space-around', flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.2)' }}
+                    style={{ position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, paddingHorizontal: 100, justifyContent: 'space-around', flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.2)' }}
                 >
                     <Text
                         style={{ fontSize: 25, textAlign: 'center', fontFamily: 'Poppins-Bold', paddingVertical: 13, color: 'white' }}
@@ -72,9 +75,6 @@ export default function AuthorScreen({ navigation }) {
                             <TouchableOpacity
 
                                 style={{ minHeight: (Dimensions.get('window').height / 2) - 40 }}
-                                onPress={() => {
-                                    textInputRef.current.focus()
-                                }}
                             >
                                 <TypeWriter typing={1}>
                                     Iya, Halo Farah...{"\n"}
@@ -84,18 +84,18 @@ export default function AuthorScreen({ navigation }) {
                                     Lalu selanjutnya, hari ini yah, tepat 21 September 2023 adalah hari ulang tahun mu.{"\n"}
                                     Jadi, Selamat Ulang Tahun dan kebetulan juga, pas banget dirimu hari ini mungkin sudah sampai di Jepang, jadi selamat juga uisan sampai di Jepang.{"\n"}
                                     {"\n"}
-                                    Selanjutnya, yah walaupun tidak diminta, pengin aku mengatakan satu patah dua patah kata untuk dirimu...{"\n"}
+                                    Selanjutnya, pengin aku mengatakan satu patah dua patah kata...{"\n"}
                                     {"\n"}
                                     Pertama, berkaitan dengan ulang tahun. Selamat Ulang Tahun, semoga dirimu panjang umur, sehat selalu, dimudahkan rezeki nya, dimudahkan urusannya dan yah intinya sing apik2 nggo dirimu.{"\n"}
-                                    Kedua, wah mantap uisan di Jepang. Boleh lah yah, kapan-kapan ngobrol tentang Jepang.{"\n"}
+                                    Kedua, wah mantap uisan di Jepang. Boleh lah, kapan-kapan ngobrol tentang Jepang.{"\n"}
                                     {"\n"}
-                                    Tapi tanggal 21 September, kayak spesial loh menurutku.{"\n"}
+                                    Ngomong-ngomong tanggal 21 September, kayak spesial loh menurutku.{"\n"}
                                     Pertama, kui sudah pasti ulang tahun mu. {"\n"}
                                     Kedua, kebetulan juga dirimu tiba di Jepang, di tanggal 21 September. Pas banget, dadi kayak kebetulan banget menurutku.{"\n"}
                                     Ketiga, entah kenapa kebetulan juga ada orang yang ulang tahun nya juga sama denganmu, hehe. {"\n"}
                                     {"\n"}
                                     {"\n"}
-                                    Yah akhir kata, Aku tetap komitmen dengan apa yang tertulis di surat kemarin.{"\n"}
+                                    Yah akhir kata, dari aku. Walaupun tidak diminta, aku tetap akan melakukan apa sing aku tulis di surat kemarin.{"\n"}
                                     {"\n"}
                                     Song:{"\n"}
                                     1. Katawaredoki - Radwimps{"\n"}

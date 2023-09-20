@@ -21,6 +21,7 @@ export default function WishMainScreen({ navigation }) {
 
     useEffect(() => {
         if (isFocused) {
+            whoosh.play()
             loadWish()
 
             const backHandler = BackHandler.addEventListener('hardwareBackPress', function () {
@@ -34,6 +35,14 @@ export default function WishMainScreen({ navigation }) {
             return () => { }
         }
     }, [isFocused])
+
+    const storeVal = async () => {
+        try {
+            await AsyncStorage.setItem('farah_wish', wishesText);
+        } catch (e) {
+            // saving error
+        }
+    }
 
     const loadWish = async () => {
         try {
@@ -121,8 +130,16 @@ export default function WishMainScreen({ navigation }) {
                         </View>
 
                         <TouchableOpacity
-                            style={{ backgroundColor: 'rgb(249 115 22)', borderRadius: 8 }}
+                            style={{
+                                backgroundColor: 'rgb(219 39 119)',
+                                shadowColor: 'rgba(255,255,255, 1)',
+                                shadowOffset: { width: 0, height: 0 },
+                                elevation: 16,
+                                shadowOpacity: 1,
+                                borderRadius: 8
+                            }}
                             onPress={() => {
+                                storeVal()
                                 whoosh.pause()
                                 navigation.navigate('MainScreen')
                             }}
