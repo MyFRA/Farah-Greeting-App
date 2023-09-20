@@ -24,6 +24,8 @@ import SplashScreen from './src/screens/SplashScreen';
 import BirthdayScreen from './src/screens/BirthdayScreen';
 import WishScreen from './src/screens/WishScreen';
 import AuthorScreen from './src/screens/AuthorScreen';
+import MainScreen from './src/screens/MainScreen';
+import WishMainScreen from './src/screens/WishMainScreen';
 
 const Stack = createNativeStackNavigator();
 function App() {
@@ -45,8 +47,19 @@ function App() {
                     component={SplashScreen}
                 />
                 <Stack.Screen
+                    name='MainScreen'
+                    component={MainScreen}
+                />
+
+
+
+                <Stack.Screen
                     name='WishScreen'
                     component={WishScreen}
+                />
+                <Stack.Screen
+                    name='WishMainScreen'
+                    component={WishMainScreen}
                 />
                 <Stack.Screen
                     name='AuthorScreen'

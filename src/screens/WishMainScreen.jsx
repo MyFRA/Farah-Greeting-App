@@ -13,7 +13,7 @@ var whoosh = new Sound('kimi_dattara.mp3', Sound.MAIN_BUNDLE, (error) => {
     }
 })
 
-export default function WishScreen({ navigation }) {
+export default function WishMainScreen({ navigation }) {
 
     const textInputRef = useRef()
     const [wishesText, setWishesText] = useState('')
@@ -21,12 +21,11 @@ export default function WishScreen({ navigation }) {
 
     useEffect(() => {
         if (isFocused) {
-            whoosh.play()
+            loadWish()
 
             const backHandler = BackHandler.addEventListener('hardwareBackPress', function () {
                 whoosh.pause()
-                navigation.navigate('BirthdayScreen')
-
+                navigation.navigate('MainScreen')
                 return () => { };
             })
 
@@ -35,20 +34,6 @@ export default function WishScreen({ navigation }) {
             return () => { }
         }
     }, [isFocused])
-
-    const storeVal = async () => {
-        try {
-            await AsyncStorage.setItem('farah_wish', wishesText);
-        } catch (e) {
-            // saving error
-        }
-    }
-
-    useEffect(() => {
-        whoosh.play()
-
-        loadWish()
-    }, [])
 
     const loadWish = async () => {
         try {
@@ -60,6 +45,12 @@ export default function WishScreen({ navigation }) {
             // error reading value
         }
     }
+
+    useEffect(() => {
+        loadWish()
+
+        whoosh.play()
+    }, [])
 
     let config = {
         num: [4, 7],
@@ -105,7 +96,7 @@ export default function WishScreen({ navigation }) {
                     >
                         <Text
                             style={{ fontSize: 25, textAlign: 'center', fontFamily: 'Poppins-Bold', paddingVertical: 13, color: 'white' }}
-                        >Buat Harapan</Text>
+                        >Harapanmu</Text>
 
                         <View
                             style={{ backgroundColor: 'rgba(255,255,255, 0.8)', height: Dimensions.get('window').height / 2, borderRadius: 10, padding: 20 }}
@@ -130,18 +121,10 @@ export default function WishScreen({ navigation }) {
                         </View>
 
                         <TouchableOpacity
-                            style={{
-                                backgroundColor: 'rgb(219 39 119)',
-                                shadowColor: 'rgba(255,255,255, 1)',
-                                shadowOffset: { width: 0, height: 0 },
-                                elevation: 16,
-                                shadowOpacity: 1,
-                                borderRadius: 8
-                            }}
+                            style={{ backgroundColor: 'rgb(249 115 22)', borderRadius: 8 }}
                             onPress={() => {
-                                storeVal()
                                 whoosh.pause()
-                                navigation.navigate('AuthorScreen')
+                                navigation.navigate('MainScreen')
                             }}
                         >
                             <Text
@@ -151,7 +134,7 @@ export default function WishScreen({ navigation }) {
                                     elevation: 16,
                                     shadowOpacity: 1, fontFamily: 'Poppins-Bold', paddingVertical: 13
                                 }}
-                            >Simpan Harapan & Lanjutkan</Text>
+                            >Simpan Harapan & Kembali</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

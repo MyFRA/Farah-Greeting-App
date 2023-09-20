@@ -1,10 +1,11 @@
 import KeepAwake from "@sayem314/react-native-keep-awake";
 import { useEffect, useState } from "react";
-import { Animated, Button, Dimensions, ImageBackground, StatusBar, Text, Touchable, TouchableOpacity, View } from "react-native";
+import { Animated, BackHandler, Button, Dimensions, ImageBackground, StatusBar, Text, Touchable, TouchableOpacity, View } from "react-native";
 import Draggable from "react-native-draggable";
 import FastImage from "react-native-fast-image";
 import Sound from "react-native-sound";
 import ParticlesBg from 'react-native-particles-bg';
+import { useIsFocused } from "@react-navigation/native";
 
 var whoosh = new Sound('itsumo_nando_demo.mp3', Sound.MAIN_BUNDLE, (error) => {
     if (error) {
@@ -17,11 +18,38 @@ export default function BirthdayScreen({ navigation }) {
     const [displayCandle1, setDisplayCandle1] = useState('none')
     const [displayCandle2, setDisplayCandle2] = useState('none')
     const [showParticles, setShowParticles] = useState(false)
-    const [fadeTextHappy] = useState(new Animated.Value(0))
-    const [fadeTextFarah] = useState(new Animated.Value(0))
+    const [fadeTextHappy, setFadeTextHappy] = useState(new Animated.Value(0))
+    const [fadeTextFarah, setFadeTextFarrah] = useState(new Animated.Value(0))
     const [bgColor, setBgColor] = useState('rgba(0, 0, 0, 0.1)')
     const [bgButtonBuatHarapan, setBgButtonBuatHarapan] = useState('rgb(107 114 128)')
     const [enableButtonWishes, setEnableButtonWishes] = useState(false)
+    const isFocused = useIsFocused()
+
+    useEffect(() => {
+        if (isFocused) {
+            if (!whoosh.isPlaying()) {
+                whoosh.play()
+            }
+
+            const backHandler = BackHandler.addEventListener('hardwareBackPress', function () {
+                whoosh.stop()
+                setDisplayCandle1('none')
+                setDisplayCandle2('none')
+                setShowParticles(false)
+                setFadeTextHappy(new Animated.Value(0))
+                setFadeTextFarrah(new Animated.Value(0))
+                setBgColor('rgba(0, 0, 0, 0.1)')
+                setBgButtonBuatHarapan('rgb(107 114 128)')
+                setEnableButtonWishes(false)
+                navigation.navigate('MainScreen')
+                return () => { };
+            })
+
+            return () => backHandler.remove()
+        } else {
+            return () => { }
+        }
+    }, [isFocused])
 
     useEffect(() => {
         if (displayCandle1 == 'flex' && displayCandle2 == 'flex') {
@@ -41,7 +69,7 @@ export default function BirthdayScreen({ navigation }) {
             }).start();
 
             setBgColor('rgba(0, 0, 0, 0.5)')
-            setBgButtonBuatHarapan('rgb(249 115 22)')
+            setBgButtonBuatHarapan('rgb(219 39 119)')
             setEnableButtonWishes(true)
         }
     }, [displayCandle1, displayCandle2])
@@ -69,7 +97,7 @@ export default function BirthdayScreen({ navigation }) {
             <KeepAwake />
 
             <View style={{ position: 'relative', flex: 1 }}>
-                <ImageBackground source={{ uri: 'https://static.vecteezy.com/system/resources/previews/017/188/305/original/japanese-background-illustration-happy-new-year-decoration-template-in-pastel-japanese-pattern-style-with-fuji-mountain-moon-cloud-and-cherry-blossom-design-for-wallpaper-poster-banner-vector.jpg' }} style={{ flex: 1 }} resizeMode="cover">
+                <ImageBackground source={require('./../assets/images/birthday_screen_bg.jpg')} style={{ flex: 1 }} resizeMode="cover">
                     <View style={{ backgroundColor: bgColor, flex: 1 }}>
                         {
                             showParticles ?
@@ -86,7 +114,7 @@ export default function BirthdayScreen({ navigation }) {
                         <Animated.Text style={{
                             opacity: fadeTextHappy,
                             color: '#FFF',
-                            fontFamily: 'LibreBaskerville-Bold',
+                            fontFamily: 'Poppins-Bold',
                             textShadowColor: 'rgba(255, 255, 255, 0.55)',
                             textShadowOffset: { width: 0, height: 0 },
                             textShadowRadius: 20,
@@ -96,13 +124,13 @@ export default function BirthdayScreen({ navigation }) {
                         <Animated.Text style={{
                             opacity: fadeTextFarah,
                             color: '#FFF',
-                            fontFamily: 'LibreBaskerville-Bold',
+                            fontFamily: 'Poppins-Bold',
                             textShadowColor: 'rgba(255, 255, 255, 0.55)',
                             textShadowOffset: { width: 0, height: 0 },
                             textShadowRadius: 20,
                             textAlign: 'center',
-                            fontSize: 33,
-                            marginTop: 15
+                            fontSize: 35,
+                            marginTop: 2
                         }}>Farah Dwi Atika</Animated.Text>
                     </View>
 
@@ -129,7 +157,7 @@ export default function BirthdayScreen({ navigation }) {
                         <Text
                             style={{
                                 color: '#FAFAFA',
-                                fontFamily: 'LibreBaskerville-Bold',
+                                fontFamily: 'Poppins-SemiBold',
                                 fontSize: 18
                             }}
                         >Buat Harapan</Text>
@@ -141,10 +169,6 @@ export default function BirthdayScreen({ navigation }) {
                 style={{ position: 'absolute' }}
             >
                 <FastImage
-                    onTouchStart={() => {
-                        setDisplayCandle1('none')
-                        setDisplayCandle2('none')
-                    }}
                     source={require('./../assets/images/ultah.png')}
                     style={{
                         width: Dimensions.get('window').height + 50,
