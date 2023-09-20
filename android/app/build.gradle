@@ -73,9 +73,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.farahgrettingapp"
+    namespace "com.greeting.farah"
     defaultConfig {
-        applicationId "com.farahgrettingapp"
+        applicationId "com.greeting.farah"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

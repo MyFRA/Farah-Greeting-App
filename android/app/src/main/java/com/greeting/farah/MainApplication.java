@@ -1,4 +1,4 @@
-package com.farahgrettingapp;
+package com.greeting.farah;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "FarahGrettingApp.app"
-               BlueprintName = "FarahGrettingApp"
-               ReferencedContainer = "container:FarahGrettingApp.xcodeproj">
+               BuildableName = "FarahGreeting.app"
+               BlueprintName = "FarahGreeting"
+               ReferencedContainer = "container:FarahGreeting.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "FarahGrettingAppTests.xctest"
-               BlueprintName = "FarahGrettingAppTests"
-               ReferencedContainer = "container:FarahGrettingApp.xcodeproj">
+               BuildableName = "FarahGreetingTests.xctest"
+               BlueprintName = "FarahGreetingTests"
+               ReferencedContainer = "container:FarahGreeting.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "FarahGrettingApp.app"
-            BlueprintName = "FarahGrettingApp"
-            ReferencedContainer = "container:FarahGrettingApp.xcodeproj">
+            BuildableName = "FarahGreeting.app"
+            BlueprintName = "FarahGreeting"
+            ReferencedContainer = "container:FarahGreeting.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "FarahGrettingApp.app"
-            BlueprintName = "FarahGrettingApp"
-            ReferencedContainer = "container:FarahGrettingApp.xcodeproj">
+            BuildableName = "FarahGreeting.app"
+            BlueprintName = "FarahGreeting"
+            ReferencedContainer = "container:FarahGreeting.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
