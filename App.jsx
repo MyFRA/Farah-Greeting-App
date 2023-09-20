@@ -39,20 +39,17 @@ function App() {
                 }}
             >
                 <Stack.Screen
-                    name='BirthdayScreen'
-                    component={BirthdayScreen}
-                />
-                <Stack.Screen
                     name='SplashScreen'
                     component={SplashScreen}
+                />
+                <Stack.Screen
+                    name='BirthdayScreen'
+                    component={BirthdayScreen}
                 />
                 <Stack.Screen
                     name='MainScreen'
                     component={MainScreen}
                 />
-
-
-
                 <Stack.Screen
                     name='WishScreen'
                     component={WishScreen}
